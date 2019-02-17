@@ -1,0 +1,8 @@
+{
+  "short_name": "react-dependency-injection",
+  "name": "react-dependency-injection",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
