@@ -1,0 +1,89 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react"
+  ],
+  "rules": {
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "no-shadowed-variable": false,
+    "no-string-literal": false,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
+    "no-trailing-whitespace": true,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "member-access": false,
+    "member-ordering": [
+      false,
+      {
+        "order": [
+          "protected-static-field",
+          "protected-static-method",
+          "public-static-field",
+          "public-static-method",
+          "private-static-field",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "ordered-imports": false,
+    "trailing-comma": false,
+    "interface-name": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "no-duplicate-imports": false,
+    "no-empty-interface": false,
+    "no-empty": [
+      true,
+      "allow-empty-catch",
+      "allow-empty-functions"
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "no-invalid-template-strings": false,
+    "import-spacing": true,
+    "arrow-parens": false,
+    "ban-types": false,
+    "no-this-assignment": [
+      true,
+      {
+        "allowed-names": [
+          "^self$"
+        ],
+        "allow-destructuring": true
+      }
+    ],
+    "max-line-length": [
+      true,
+      140
+    ],
+    "max-classes-per-file": false,
+    "object-literal-shorthand": false,
+    "no-console": false,
+    "no-object-literal-type-assertion": false,
+    "no-namespace": false,
+    "prefer-conditional-expression": false,
+    "no-var-requires": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
+  }
+}
