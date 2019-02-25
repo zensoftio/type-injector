@@ -7,6 +7,7 @@
   "repository": "zensoft/react-dependency-injection",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
@@ -23,15 +24,16 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "@types/reflect-metadata": "0.0.5",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
