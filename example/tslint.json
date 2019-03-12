@@ -17,6 +17,7 @@
       true,
       "allow-fast-null-checks"
     ],
+    "no-debugger": false,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
@@ -46,6 +47,7 @@
     "ordered-imports": false,
     "trailing-comma": false,
     "interface-name": false,
+    "jsx-alignment": false,
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "no-duplicate-imports": false,
@@ -85,12 +87,5 @@
     "no-var-requires": false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false
-  },
-  "linterOptions": {
-    "exclude": [
-      "config/**/*.js",
-      "node_modules/**/*.ts",
-      "coverage/lcov-report/*.js"
-    ]
   }
 }

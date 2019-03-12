@@ -3,11 +3,15 @@ import * as ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-// @ts-ignore
-import Service from './service'
+import Assembly from './assembly'
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById('root') as HTMLElement
-)
+const assembly = new Assembly(['post', 'user'])
+
+assembly.assemble().then(() => {
+  ReactDOM.render(
+    <App/>,
+    document.getElementById('root') as HTMLElement
+  )
+})
+
 registerServiceWorker()

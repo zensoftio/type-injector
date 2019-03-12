@@ -3,3 +3,53 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#root {
+  background: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#root .container {
+
+  background: #fff;
+  box-shadow: 0 1px 3px 2px #ccc;
+  margin: 20px;
+
+  width: 70%;
+  min-width: 800px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+#root .container .content {
+  flex: 1 1 auto;
+
+  border-right: 1px solid #ccc;
+}
+
+#root .container .content .header {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#root .container .sidebar {
+  flex: 0 0 300px;
+
+}
+
+#root .container .sidebar .header {
+  background: #fafafa;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
