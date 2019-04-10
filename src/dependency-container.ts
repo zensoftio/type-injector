@@ -15,12 +15,12 @@ export interface Injectable extends Object {
   /**
    * Called by container after constructor, but before property/method injections
    */
-  postConstructor(): void;
+  postConstructor(): void
 
   /**
    * Called by container after all property/method injections
    */
-  awakeAfterInjection(): void;
+  awakeAfterInjection(): void
 }
 
 /**
@@ -35,7 +35,7 @@ export interface Resolver {
    * @returns {T} - resolved dependency
    * @throws - Throws an error if registration for supplied qualifier is not present.
    */
-  resolve<T extends Injectable>(qualifier: string, targetName: string): T;
+  resolve<T extends Injectable>(qualifier: string, targetName: string): T
 }
 
 /**

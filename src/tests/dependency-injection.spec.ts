@@ -54,13 +54,13 @@ describe('Dependency Injection', () => {
       }).toThrow(`'@injectable' decorator SHOULD NOT be used for React components! Usage on '${Component.name}' is invalid.`)
     })
 
-
     it('does not affect default container in test environment', () => {
 
       injectable(testInjectionQualifier1, RegistrationType.TRANSIENT)(DependencyMock1)
 
       expect(() => Container.defaultContainer.resolve(testInjectionQualifier1, testTargetName))
-        .toThrow(`No registration in container '${Container.defaultContainer.name}' for qualifier '${testInjectionQualifier1}' requested by '${testTargetName}'`)
+        .toThrow(`No registration in container '${Container.defaultContainer.name}'` +
+          ` for qualifier '${testInjectionQualifier1}' requested by '${testTargetName}'`)
     })
 
     it('does not affect other containers', () => {
@@ -70,7 +70,8 @@ describe('Dependency Injection', () => {
       injectable(testInjectionQualifier1, RegistrationType.TRANSIENT, container)(DependencyMock1)
 
       expect(() => Container.defaultContainer.resolve(testInjectionQualifier1, testTargetName))
-        .toThrow(`No registration in container '${Container.defaultContainer.name}' for qualifier '${testInjectionQualifier1}' requested by '${testTargetName}'`)
+        .toThrow(`No registration in container '${Container.defaultContainer.name}'` +
+          ` for qualifier '${testInjectionQualifier1}' requested by '${testTargetName}'`)
     })
 
     it('registers container-wide dependencies by default', () => {
@@ -192,10 +193,10 @@ describe('Dependency Injection', () => {
 
       expect(() => {
 
-        //@ts-ignore noUnusedLocals
+        // @ts-ignore noUnusedLocals
         class Component extends React.Component {
 
-          //@ts-ignore noUnusedParameters
+          // @ts-ignore noUnusedParameters
           constructor(props: any, state: any, @injectConstructor(testInjectionQualifier1) _: any) {
             super(props, state)
           }
@@ -384,7 +385,7 @@ describe('Dependency Injection', () => {
       }
 
       @injectAware(container)
-        //@ts-ignore noUnusedLocals
+        // @ts-ignore noUnusedLocals
       class InjectAwareChild extends InjectAwareParent {
         @injectProperty(testInjectionQualifier2) injection2: DependencyMock2
       }

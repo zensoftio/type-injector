@@ -139,7 +139,7 @@ export const injectable = (qualifier: string,
 export const INJECT_AWARE = Symbol('inject_aware')
 
 export interface InjectAware extends React.Component {
-  awakeAfterInjection?() : void
+  awakeAfterInjection?(): void
 }
 
 /**
@@ -155,6 +155,9 @@ export const injectAware = (container?: Container) => (target: any) => {
   if (!target.prototype.isReactComponent) {
     throw new Error(`'@injectAware' decorator SHOULD ONLY be used for React components! Usage on '${target.name}' is invalid`)
   }
+
+  console.warn('injectAware decorator is deprecated and will be removed in upcoming version. ' +
+    'Please, migrate your code to withDependencies HOC')
 
   // Same component class should not be decorated as inject-aware twice
   if (Reflect.getOwnMetadata(INJECT_AWARE, target)) {
