@@ -22,6 +22,7 @@
     "noUnusedLocals": true
   },
   "exclude": [
+    "config",
     "node_modules",
     "build",
     "scripts",

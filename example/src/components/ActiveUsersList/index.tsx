@@ -1,14 +1,30 @@
 import * as React from 'react'
-import {injectAware, injectProperty} from 'react-dependency-injection'
+import {ComponentDependencies, withDependencies, WithDependencies} from 'react-dependency-injection'
 import {UserService} from '../../service-layer'
 
-@injectAware()
-export default class ActiveUsersList extends React.Component {
+interface Dependencies extends ComponentDependencies {
+  userService: UserService
+}
 
-  @injectProperty('UserService')
-  private userService: UserService
+interface Props extends WithDependencies<Dependencies> {
+
+}
+
+export class ActiveUsersList extends React.Component<Props> {
 
   render() {
-    return <div/>
+    return (
+      <div>
+        {this.props.deps.userService.getUsers().map(user =>
+          <div key={user.id}>
+            {user.username}
+          </div>
+        )}
+      </div>
+    )
   }
 }
+
+export default withDependencies<Dependencies>({
+  userService: 'UserService'
+})(ActiveUsersList)

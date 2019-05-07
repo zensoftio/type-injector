@@ -1,11 +1,5 @@
+import {ModuleLoaderAssembly} from 'react-dependency-injection'
 
-export class Assembly {
-  constructor(private dependencyLayers: string[]) { }
+const SERVICE_LAYERS = ['post', 'user'].map(layerName => './service/' + layerName)
 
-  async assemble() {
-
-    return Promise.all(this.dependencyLayers.map(layer => require(`./services/${layer}`)))
-  }
-}
-
-export default Assembly
+export const ASSEMBLIES = [new ModuleLoaderAssembly(SERVICE_LAYERS)]

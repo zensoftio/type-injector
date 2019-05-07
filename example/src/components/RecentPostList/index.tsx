@@ -1,14 +1,22 @@
 import * as React from 'react'
-import {injectAware, injectProperty} from 'react-dependency-injection'
+import {ComponentDependencies, withDependencies, WithDependencies} from 'react-dependency-injection'
 import {PostService} from '../../service-layer'
 
-@injectAware()
-export default class RecentPostList extends React.Component {
+interface Dependencies extends ComponentDependencies {
+  postService: PostService
+}
 
-  @injectProperty('PostService')
-  private postService: PostService
+interface Props extends WithDependencies<Dependencies> {
+
+}
+
+export class RecentPostList extends React.Component<Props> {
 
   render() {
     return <div/>
   }
 }
+
+export default withDependencies<Dependencies>({
+  postService: 'PostService'
+})(RecentPostList)

@@ -3,13 +3,18 @@ import * as ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-import Assembly from './assembly'
+import {Assembler, Container, ContainerProvider} from 'react-dependency-injection'
+import {ASSEMBLIES} from './assembly'
 
-const assembly = new Assembly(['post', 'user'])
+const assembler = new Assembler(ASSEMBLIES, Container.defaultContainer)
 
-assembly.assemble().then(() => {
+assembler.assemble().then(() => {
   ReactDOM.render(
-    <App/>,
+    (
+      <ContainerProvider resolver={assembler.resolver}>
+        <App/>
+      </ContainerProvider>
+    ),
     document.getElementById('root') as HTMLElement
   )
 })

@@ -10,4 +10,8 @@ export default class DefaultUserService implements UserService, Injectable {
   postConstructor(): void {
   }
 
+  // Your useful methods go here
+  getUsers() {
+    return []
+  }
 }
