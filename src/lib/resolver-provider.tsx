@@ -7,7 +7,7 @@ interface Props {
   children?: React.ReactNode | React.ReactNodeArray
 }
 
-export const ContainerProvider = (props: Props) => {
+export const ResolverProvider = (props: Props) => {
 
   return (
     <DEPENDENCY_CONTEXT.Provider value={{resolver: props.resolver || Container.defaultContainer}}>

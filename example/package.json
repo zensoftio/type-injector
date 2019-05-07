@@ -100,7 +100,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/Users/daniil.orlov/Documents/react-dependency-injection/example/tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },

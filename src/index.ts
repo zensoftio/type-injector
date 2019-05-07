@@ -1,6 +1,6 @@
 export * from './lib/dependency-injection'
 export * from './lib/container'
-export * from './lib/container-provider'
+export * from './lib/resolver-provider'
 export * from './lib/with-dependencies'
 export * from './lib/assembler'
 export * from './lib/assembly'

@@ -1,4 +1,4 @@
-import Assembler, {Assembly} from '../lib/assembler'
+import {Assembler, Assembly} from '../lib/assembler'
 import {Container, Injectable, RegistrationEntry, RegistrationType} from '../lib/container'
 
 describe('Assembler', () => {

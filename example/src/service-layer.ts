@@ -12,6 +12,3 @@ interface User {
 export interface UserService extends Injectable {
   getUsers(): User[]
 }
-
-export interface AuthService extends Injectable {
-}

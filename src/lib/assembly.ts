@@ -17,26 +17,16 @@ export class ManualRegistrationAssembly implements Assembly {
   }
 }
 
-export class ModuleLoaderAssembly implements Assembly {
+export class ClassLoaderAssembly implements Assembly {
 
-  constructor(private moduleNames: string[]) {
+  constructor(private classes: any[]) {
   }
 
   async assemble(container: Container) {
-    return Promise.all(this.moduleNames.map((moduleName) => this.loadModuleToContainer(moduleName, container)))
+    this.classes.forEach((member) => this.registerMemberInContainer(member, container))
   }
 
-  private loadModuleToContainer(moduleName: string, container: Container): Promise<void> {
-    return import(moduleName).then((module) => {
-      Object.keys(module).forEach(key => {
-        module.hasOwnProperty(key)
-        const member = module[key]
-        this.registerMemberInContainer(member, container)
-      })
-    })
-  }
-
-  private registerMemberInContainer(member: Injectable, container: Container) {
+  private registerMemberInContainer(member: any, container: Container) {
     const registrations = Reflect.getOwnMetadata(INJECTABLE_REGISTRATION, member)
 
     if (registrations) {

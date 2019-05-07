@@ -5,10 +5,10 @@ import {
   Injectable
 } from '../lib/container'
 
-const testContainerName = 'Test Container'
-const testSuiteName = 'Test Case Suite'
-
 describe('Container', () => {
+
+  const testContainerName = 'Test Container'
+  const testSuiteName = 'Test Case Suite'
 
   const testInjectionQualifier1 = 'testInjectionQualifier1'
 
