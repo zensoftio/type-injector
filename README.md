@@ -13,8 +13,10 @@ npm install --save react-dependency-injection
 Your `tsconfig.json` needs to be configured with the following flags:
 
 ```JSON
-"experimentalDecorators": true,
-"emitDecoratorMetadata": true
+{
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true
+}
 ```
 
 ## Usage
@@ -42,6 +44,8 @@ export class MyDefaultService implements MyService, Injectable {
 ```
 
 **NOTE:** Your dependencies should be loaded *before* you use them in components or other dependencies. This package does not define the only correct way to accomplish this. One of possible ways is to use an assembly:
+
+### Loading dependencies
 
 ```typescript
 
@@ -97,7 +101,7 @@ interface UserListProps extends WithDependencies<MyDependencies> {
   isEditable: boolean
 }
 
-export MyUserList extends React.Component<UserListProps> {
+export class MyUserList extends React.Component<UserListProps> {
   
   render() {
     return (

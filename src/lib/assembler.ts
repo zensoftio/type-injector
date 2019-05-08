@@ -29,12 +29,12 @@ export class Assembler {
    * Assembles dependencies into container.
    * Runs assemblies one by one and registers their dependencies.
    * Finishes registration in container after all assemblies are loaded
-   * @returns {void}
+   * @returns {Promise<Resolver>}
    */
   public async assemble() {
     this.assemblies.forEach(assembly => assembly.assemble(this.container))
     await this.container.finishRegistration()
-    return
+    return this.resolver
   }
 
   /**
