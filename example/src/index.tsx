@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-import {Assembler, Container, ResolverProvider} from 'react-dependency-injection'
+import {Assembler, Container, ResolverProvider} from 'type-injector'
 import {ASSEMBLIES} from './assembly'
 
 const assembler = new Assembler(ASSEMBLIES, Container.defaultContainer)

@@ -1,4 +1,4 @@
-import {ClassLoaderAssembly} from 'react-dependency-injection'
+import {ClassLoaderAssembly} from 'type-injector'
 import DefaultPostService from './services/post'
 import DefaultUserService from './services/user'
 

@@ -1,13 +1,13 @@
-# react-dependency-injection
+# type-injector
 
 > Decorator-based dependency injection mechanism for projects using React and TypeScript
 
-[![NPM](https://img.shields.io/npm/v/react-dependency-injection.svg)](https://www.npmjs.com/package/react-dependency-injection) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/type-injector.svg)](https://www.npmjs.com/package/type-injector) 
 
 ## Installation
 
 ```bash
-npm install --save react-dependency-injection
+npm install --save type-injector
 ```
 
 Your `tsconfig.json` needs to be configured with the following flags:
@@ -23,10 +23,10 @@ Your `tsconfig.json` needs to be configured with the following flags:
 
 ### Defining Dependencies
 
-Dependency is any class decorated with `@injectable(...)` that implements `Injectable` interface e.g.
+Dependency is any class that implements `Injectable` interface and (usually) decorated with `@injectable(...)`
 
 ```typescript
-import {injectable, Injectable} from 'react-dependency-injection'
+import {injectable, Injectable} from 'type-injector'
 import {MyService} from '../services'
 
 // Identifiers are mandatory to survive minification.
@@ -47,8 +47,55 @@ export class MyDefaultService implements MyService, Injectable {
 
 ### Loading dependencies
 
-```typescript
+Use assemblies and assembler to modularize load your dependencies into container.
 
+Convince way is to use a `ClassLoaderAssembly`:
+```typescript
+import {ClassLoaderAssembly, RegistrationEntry, RegistrationType} from 'type-injector'
+import {Service1, Service2, Service3} from './services'
+
+const SERVICE_ASSEMBLY = new ClassLoaderAssembly([Service1, Service2, Service3])
+```
+
+If you need full control over creation of your dependencies, there is a `ManualRegistrationAssembly` class:
+```typescript
+import {ManualRegistrationAssembly, RegistrationEntry, RegistrationType} from 'type-injector'
+import {Service1, Service2} from './services'
+
+const registrations = [ 
+  {
+    qualifier: 'Service1', 
+    entry: new RegistrationEntry(RegistrationType.TRANSIENT, () => new Service1())
+  },
+  {
+    qualifier: 'Service2',
+    entry: new RegistrationEntry(RegistrationType.CONTAINER, () => new Service2())
+  }
+]
+
+export const SERVICES_ASSEMBLY = new ManualRegistrationAssembly(registrations)
+```
+
+After that, use `Assembler` to register your dependencies in the container:
+```typescript jsx
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import App from './App'
+import {Assembler, Container, ResolverProvider} from 'type-injector'
+import {SERVICES_ASSEMBLY} from './assemblies'
+
+const assembler = new Assembler([SERVICES_ASSEMBLY], Container.defaultContainer)
+
+assembler.assemble().then(() => {
+  ReactDOM.render(
+    (
+      <ResolverProvider resolver={assembler.resolver}>
+        <App/>
+      </ResolverProvider>
+    ),
+    document.getElementById('root') as HTMLElement
+  )
+})
 ```
 
 ### Getting your Dependencies
@@ -56,7 +103,7 @@ export class MyDefaultService implements MyService, Injectable {
 To inject dependencies into other dependencies use `@injectConstructor`, `@injectProperty`, and/or `@injectMethod` decorators like described below:
 
 ```typescript
-import {injectable, Injectable, injectConstructor, injectProperty, injectMethod} from 'react-dependency-injection'
+import {injectable, Injectable, injectConstructor, injectProperty, injectMethod} from 'type-injector'
 import {Fetcher, MyService, MyOtherService, MyThirdService} from '../services'
 
 @injectable('MyService')
@@ -90,7 +137,7 @@ For components, use `WithDependencies` interface to declare props and `withDepen
 
 ```typescript jsx
 import * as React from 'react'
-import {WithDependencies, withDependencies} from 'react-dependency-injection'
+import {WithDependencies, withDependencies} from 'type-injector'
 import {UserService} from '../services'
 
 interface MyDependencies {
@@ -115,8 +162,100 @@ export class MyUserList extends React.Component<UserListProps> {
 }
 
 export default withDependencies({})(MyUserList)
-
 ```
+
+## Testing
+
+To test your components, import them without `withDependencies` HOC and mock there deps popr:
+
+```typescript jsx
+import * as React from 'react'
+import * as Enzyme from 'enzyme'
+import * as Adapter from 'enzyme-adapter-react-16'
+
+import {UserService} from '../../service-layer'
+import {ActiveUsersList} from '../../components/ActiveUsersList'
+
+Enzyme.configure({adapter: new Adapter()})
+
+describe('ActiveUsersList', () => {
+
+  it('renders list of users', () => {
+
+    class MockUserService implements UserService {
+      awakeAfterInjection() {
+      }
+
+      postConstructor() {
+      }
+
+      getUsers() {
+        return [{
+          id: 42,
+          username: 'Admin'
+        }]
+      }
+    }
+
+    const mockService = new MockUserService()
+
+    const wrapper = Enzyme.shallow(
+      <ActiveUsersList deps={{userService: mockService}}/>
+    )
+
+    expect(wrapper.text()).toEqual('Admin')
+  })
+})
+```
+
+If you need to test deeper hierarchy, provide a mock container:
+
+```typescript jsx
+import {
+  Container, TestDependencyProvider, RegistrationEntry, RegistrationType
+} from 'type-injector'
+
+import * as React from 'react'
+import * as Enzyme from 'enzyme'
+import * as Adapter from 'enzyme-adapter-react-16'
+
+import {UserService} from '../../service-layer'
+import ActiveUsersList from '../../components/ActiveUsersList'
+
+Enzyme.configure({adapter: new Adapter()})
+
+describe('ActiveUsersList', () => {
+
+  const testContainerName = 'TestContainer'
+
+  it('renders list of users', () => {
+    class MockUserService implements UserService {
+      awakeAfterInjection() {}
+      postConstructor() {}
+
+      getUsers() {
+        return [{
+          id: 42,
+          username: 'Admin'
+        }]
+      }
+    }
+
+    const testContainer = new Container(testContainerName)
+    testContainer.register(
+      'UserService',
+      new RegistrationEntry<UserService>(RegistrationType.TRANSIENT, () => new MockUserService())
+    )
+
+    const wrapper = Enzyme.mount(
+      <DependencyProvider container={testContainer}>
+        <ActiveUsersList/>
+      </DependencyProvider>
+    )
+    expect(wrapper.text()).toEqual('Admin')
+  })
+})
+``` 
 
 ## License
 

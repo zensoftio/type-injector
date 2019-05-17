@@ -9,7 +9,7 @@
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "^16.8.3",
-    "react-dependency-injection": "file:..",
+    "type-injector": "file:..",
     "react-dom": "^16.8.3",
     "reflect-metadata": "^0.1.10",
     "resolve": "1.6.0",

@@ -1,4 +1,4 @@
-import {Injectable} from 'react-dependency-injection'
+import {Injectable} from 'type-injector'
 
 export interface PostService extends Injectable {
 

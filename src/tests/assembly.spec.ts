@@ -42,9 +42,9 @@ describe('Assembly', () => {
 
       const decoratedDependency = injectable(testDependencyQualifier)(TestDependency)
 
-      const manualAssembly = new ClassLoaderAssembly([decoratedDependency])
+      const classLoaderAssembly = new ClassLoaderAssembly([decoratedDependency])
 
-      manualAssembly.assemble(testContainer)
+      classLoaderAssembly.assemble(testContainer)
 
       const dependency = testContainer.resolve(testDependencyQualifier, testSuiteName)
 

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {ComponentDependencies, withDependencies, WithDependencies} from 'react-dependency-injection'
+import {ComponentDependencies, withDependencies, WithDependencies} from 'type-injector'
 import {PostService} from '../../service-layer'
 
 interface Dependencies extends ComponentDependencies {

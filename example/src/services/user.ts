@@ -1,4 +1,4 @@
-import {injectable, Injectable} from 'react-dependency-injection'
+import {injectable, Injectable} from 'type-injector'
 import {UserService} from '../service-layer'
 
 @injectable('UserService')
