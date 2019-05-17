@@ -259,4 +259,4 @@ describe('ActiveUsersList', () => {
 
 ## License
 
-MIT © [zensoft](https://github.com/zensoft)
+MIT © [Zensoft IO, LLC](https://github.com/zensoftio)
