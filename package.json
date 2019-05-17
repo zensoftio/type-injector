@@ -1,10 +1,10 @@
 {
-  "name": "react-dependency-injection",
+  "name": "type-injector",
   "version": "1.0.0",
   "description": "Decorator-based dependency injection mechanism for projects using React and TypeScript",
   "author": "zensoft",
   "license": "MIT",
-  "repository": "zensoft/react-dependency-injection",
+  "repository": "https://github.com/zensoftio/type-injector",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",

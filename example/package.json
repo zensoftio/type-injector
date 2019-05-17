@@ -1,6 +1,6 @@
 {
-  "name": "react-dependency-injection-example",
-  "homepage": "https://zensoft.github.io/react-dependency-injection",
+  "name": "type-injector-example",
+  "homepage": "https://github.com/zensoftio/type-injector",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -29,6 +29,8 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fork-ts-checker-webpack-plugin": "1.3.3",
